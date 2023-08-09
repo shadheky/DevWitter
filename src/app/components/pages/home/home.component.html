@@ -1,0 +1,18 @@
+<div  id="min-heigth">
+
+    <h1>Posts para você</h1>
+    <div class="container col-lg-8 col-xl-6">
+        <div class="row">
+            <div class="col-12 ">
+                <a class="card mb-5" *ngFor="let post of posts" style="width: 100%;" routerLink="/post/{{post.id}}">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ post.title }}</h5>
+                      <h6 class="card-subtitle mb-2 text-body-secondary">Post by {{ post.author }}</h6>
+                      <p class="card-text">{{ post.content }}</p>
+                     
+                    </div>
+                </a>
+            </div>
+        </div>
+   </div>
+</div>

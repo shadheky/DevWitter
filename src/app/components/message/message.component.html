@@ -1,0 +1,11 @@
+<div class="col-md-8 container justify-content-center" *ngIf="messageService.message">
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <span class="content">{{messageService.message}}</span>
+    <button
+      type="button"
+      class="btn-close"
+        (click)="messageService.clear()"
+      aria-label="Close"
+    ></button>
+  </div>
+</div>

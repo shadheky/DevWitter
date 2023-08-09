@@ -1,0 +1,94 @@
+<div id="min-heigth">
+  <div class="container col-lg-8 col-xl-6">
+    <div class="col-lg-12 gy-5">
+      <div class="card mb-5" style="width: 100%">
+        <div class="card-body">
+          <h5 class="card-title">{{ post.title }}</h5>
+          <h6 class="card-subtitle mb-2 text-body-secondary">Post by {{ post.author }}</h6>
+          <p class="card-text">{{ post.content }}</p>
+          <i
+            class="bi bi-chat-square-fill text-success"
+            data-bs-toggle="modal"
+            data-bs-target="#commentFrom"
+            (click)="prepareToCreate()"
+          ></i>
+        </div>
+      </div>
+
+      <div  class="col-12 justify-content-center"  *ngIf="post.comments!.length">
+        <div class="card mb-5"  *ngFor="let comment of post.comments!"  style="width: 100%">
+          <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-body-secondary">
+              Coment by {{ comment.author }}
+            </h6>
+            <p class="card-text">{{ comment.content }}</p>
+            <div class="options">
+              <i class="bi bi-pencil-fill m-2"  data-bs-toggle="modal"
+              data-bs-target="#commentFrom"
+              (click)="prepareToUpdate( comment )"
+              ></i>
+              <i class="bi bi-trash3-fill m-2" (click)="redirectToDelete(comment.id)"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div
+      class="modal fade"
+      id="commentFrom"
+      tabindex="-1"
+      aria-labelledby="comment-form"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="comment-form">
+              Faça seu comentário
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+
+            <form (ngSubmit)="redirectToRequest()" action="" class="form" [formGroup]="commentForm" #formDir="ngForm">
+              <div class="form-group mb-4">
+                <label for="author" class="form-label">Autor</label>
+                <input formControlName="author" name="author" placeholder="Seu nome" type="text" class="form-control" id="author" required [(ngModel)]="commentToSend.author" />
+                <div class="validation-error"  *ngIf="author!.invalid && formDir.submitted">
+                  <p>Author inválido</p>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="content" class="form-label"
+                  >Conteúdo do seu Comentário</label
+                >
+                <textarea class="form-control" id="content" rows="3" [(ngModel)]="commentToSend.content" formControlName="content" placeholder="Seu comentário vai aqui" ></textarea>
+              
+                <div class="validation-error"  *ngIf="content!.invalid && formDir.submitted">
+                  <p>Conteúdo inválido inválido</p>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                class="btn btn-success col-12 mt-5"
+          
+              >
+                Publicar
+              </button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
