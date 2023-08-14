@@ -28,4 +28,8 @@ export class HomeComponent implements OnInit{
 
   }
 
+  formatDate(dateString:string){
+    return this.postService.generateTimestampToFrendlyFormat(dateString);
+  }
+
 }

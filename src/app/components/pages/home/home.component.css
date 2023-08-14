@@ -4,3 +4,7 @@ h1{
     font-weight: 900;
     
 }
+
+p.data-post {
+    text-align: right;
+}

@@ -5,5 +5,6 @@ export interface Post {
     author:string,
     title:string,
     content:string
-    comments?: Comment[]
+    comments?: Comment[],
+    postDate?:any
 }
