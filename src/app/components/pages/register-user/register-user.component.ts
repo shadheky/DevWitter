@@ -72,6 +72,7 @@ export class RegisterUserComponent {
       },
       err => {
         this.messageService.add(err.error.Message);
+        this.enableButton();
       }
     );
 
@@ -79,6 +80,10 @@ export class RegisterUserComponent {
 
   disableButton():void {
     this.formIsSubmitted = true;
+  }
+
+  enableButton():void {
+    this.formIsSubmitted = false;
   }
 
 }
