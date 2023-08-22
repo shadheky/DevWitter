@@ -19,7 +19,7 @@ export class RegisterUserComponent {
   }
   confirmPasswordValue:string = "";
 
-  
+  formIsSubmitted:boolean = false;
 
   userFormGroup:FormGroup = new FormGroup({
     username: new FormControl("", [Validators.required, Validators.maxLength(60)]),
@@ -57,13 +57,18 @@ export class RegisterUserComponent {
         return;
     }
 
+    this.disableButton();
+    
     this.userToPersit.username = this.userToPersit.username.trim();
-
     this.userService.createUser(this.userToPersit).subscribe(
       response => { 
         this.messageService.add("Usuário cadastrado com sucesso");
         this.router.navigate(['/'])
         this.loginFormService.showLoginScreen();
+        this.userToPersit = {
+          username:"",
+          password:""
+        }
       },
       err => {
         this.messageService.add(err.error.Message);
@@ -72,5 +77,8 @@ export class RegisterUserComponent {
 
   }
 
+  disableButton():void {
+    this.formIsSubmitted = true;
+  }
 
 }

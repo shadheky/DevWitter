@@ -21,6 +21,8 @@ export class PostFromComponent implements OnInit{
     content:""
   }
 
+  formIsSubmitted:boolean = false;
+
   loginFormIsShowed:boolean = false;
 
 
@@ -60,6 +62,8 @@ export class PostFromComponent implements OnInit{
     if(this.postFormGroup.invalid){
       return;
     }
+
+    this.formIsSubmitted = true;
 
     this.postService.createPost(this.postToPersit).subscribe( response => {
       this.router.navigate(['/']);

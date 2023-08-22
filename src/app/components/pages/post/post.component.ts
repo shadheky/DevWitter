@@ -26,6 +26,8 @@ export class PostComponent implements OnInit{
     postId:0
   }
 
+  formIsSubmitted:boolean = false;
+
   private methodRequest:String = "post";
 
 
@@ -41,6 +43,8 @@ export class PostComponent implements OnInit{
                 this.commentService.create(this.commentToSend).subscribe( response => {
                 this.post.comments?.push(response);
                 this.messageService.add("Comentário postado com sucesso");
+                this.enableButton();
+                this.clearForm();
               } );
              
     }
@@ -74,7 +78,7 @@ export class PostComponent implements OnInit{
     const id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     this.postService.findById(id).subscribe(  response => {
        this.post = response;
-   
+    
     } );
   }
 
@@ -89,7 +93,7 @@ export class PostComponent implements OnInit{
         return
       }
       
-
+      this.disableButton();
       this.commentResquestMethods.post();
     
   }
@@ -108,6 +112,18 @@ export class PostComponent implements OnInit{
       );
   }
 
+  clearForm():void {
+    this.commentToSend = {userId:0,
+      content:"",
+      postId:0}
+  }
+
+  disableButton():void {
+    this.formIsSubmitted = true;
+  }
+  enableButton():void {
+    this.formIsSubmitted = false;
+  }
 
 }
 
