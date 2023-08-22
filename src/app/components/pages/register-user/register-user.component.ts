@@ -43,6 +43,10 @@ export class RegisterUserComponent {
     return localStorage.getItem('token') === null;
   }
 
+  openLoginForm():void {
+    this.loginFormService.showLoginScreen();
+  }
+
   createUser():void {
     if(this.userFormGroup.invalid) {
       return
