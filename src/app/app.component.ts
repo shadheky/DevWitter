@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from './services/login.service';
+import { LoginFormService } from './services/login-form.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,12 +20,13 @@ export class AppComponent implements OnInit{
       },
       err => {
         localStorage.clear();
+        this.loginFormService.showLoginScreen();
       }
     );
 
   }
 
-  constructor(private loginService:LoginService){}
+  constructor(private loginService:LoginService, private loginFormService:LoginFormService){}
 
 
 
