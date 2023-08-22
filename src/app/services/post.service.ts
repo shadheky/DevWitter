@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, timestamp } from 'rxjs';
 
 import { environment } from 'src/environments/environment.development';
@@ -13,10 +13,13 @@ export class PostService {
 
 private baseUrl = environment.baseUrl + "/post";
 
-  constructor( private http: HttpClient ) { }
+  constructor( private http: HttpClient  ) { }
 
   createPost(data: Post): Observable<Post> {
-    return this.http.post<Post>(this.baseUrl, data);
+    const headers= new HttpHeaders()
+    .set('content-type', 'application/json')
+    .set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+    return this.http.post<Post>(this.baseUrl, data, {headers});
   }
 
   findAll(): Observable<Post[]> {

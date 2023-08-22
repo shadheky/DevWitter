@@ -1,0 +1,58 @@
+<div class="login-container" *ngIf="this.loginFormService.isShowed">
+  <div class="login-wrapper">
+    <h1>Login</h1>
+    <form (ngSubmit)="autorize()" #formDir="ngForm" [formGroup]="loginFormGroup">
+      <div class="mb-3">
+        <input
+        type="text"
+        name="username"
+        autocomplete="off"
+        class="form-control"
+        placeholder="Nome de usuário"
+        formControlName="username"
+        [(ngModel)]="userToAutorize.username"
+      />
+      <div class="validation-error" *ngIf="username!.invalid && formDir.submitted">
+          <p class="error-p">Insira o nome de usuário</p>
+      </div>
+      </div>
+
+      <div class="mb-3">
+        
+      <input
+      type="password"
+      name="senha"
+      autocomplete="off"
+      placeholder="Senha"
+      class="password form-control"
+      formControlName="password"
+      [(ngModel)]="userToAutorize.password"
+    />
+        <div class="validation-error" *ngIf="password!.invalid && formDir.submitted">
+          <p class="error-p">Insira a senha</p>
+        </div>
+
+      </div>
+
+      <button class="btn btn-primary" type="submit" >Logar</button>
+    </form>
+    <p>
+      Ainda não possui cadastro?
+      <a
+        routerLink="user/create/newUser"
+        type="button"
+        data-bs-dismiss="modal"
+        (click)="this.loginFormService.hideLoginScreen()"
+        >Cadastre-se</a
+      >
+    </p>
+    <p
+      class="close-p"
+      type="button"
+      data-bs-dismiss="modal"
+      (click)="this.loginFormService.hideLoginScreenAndBackToHome()"
+    >
+      Continuar sem login
+    </p>
+  </div>
+</div>

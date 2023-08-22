@@ -4,9 +4,12 @@ import { PostService } from 'src/app/services/post.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Post  } from 'src/Models/Post';
 import { Comment  } from 'src/Models/Comment';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
 
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MessagesService } from 'src/app/services/messages.service';
+import { LoginFormService } from 'src/app/services/login-form.service';
+import { bootstrapApplication } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-post',
@@ -18,7 +21,7 @@ export class PostComponent implements OnInit{
   commentForm!:FormGroup;
 
   commentToSend:Comment =  {
-    author:"",
+    userId:0,
     content:"",
     postId:0
   }
@@ -27,35 +30,21 @@ export class PostComponent implements OnInit{
 
 
   
-  constructor(private commentService:CommentsService, private postService:PostService, private activatedRoute:ActivatedRoute,private router:Router, private messageService:MessagesService) {}
+  constructor(private commentService:CommentsService, private postService:PostService, private activatedRoute:ActivatedRoute,private router:Router, private messageService:MessagesService,private loginFormService:LoginFormService) {}
+
+  
 
 
   private commentResquestMethods = {
     post : () => {     
-              this.commentToSend.postId = this.post.id;
-              this.commentService.create(this.commentToSend).subscribe( response => {
+                this.commentToSend.postId = this.post.id;
+                this.commentService.create(this.commentToSend).subscribe( response => {
                 this.post.comments?.push(response);
                 this.messageService.add("Comentário postado com sucesso");
               } );
-             },
-    put : () => {
-      this.commentToSend.postId = this.post.id;
-      this.commentService.update(this.commentToSend).subscribe( response => {
-        this.messageService.add("Comentário editado com sucesso");
-        this.post.comments?.push(response);
-
-        this.post.comments = this.post.comments?.filter( comment => comment.id !== this.commentToSend.id);
-        this.post.comments?.push(response);
-
-      });
-    },
-
-    delete: (id:number) => {
-      this.commentService.delete(id).subscribe( response => {
-        this.post.comments = this.post.comments!.filter( comment => comment.id !== id );
-        this.messageService.add("Comentário apagado");
-      } );
+             
     }
+
   }
 
 
@@ -65,7 +54,6 @@ export class PostComponent implements OnInit{
     this.loadPostWithAllComments();
 
     this.commentForm = new FormGroup({
-      author: new FormControl("", [Validators.required, Validators.maxLength(75)]),
       content: new FormControl("", [Validators.required, Validators.maxLength(200)])
 
     })
@@ -93,35 +81,23 @@ export class PostComponent implements OnInit{
 
   redirectToRequest() {
 
+    if(!localStorage.getItem('token')){
+      this.messageService.add("Realize o login para poder comentar");
+      return;
+    }
       if(this.commentForm.invalid){
         return
       }
       
-     if( this.methodRequest === "put" ){
-        this.commentResquestMethods.put();
-     }else if(this.methodRequest === "post") {
+
       this.commentResquestMethods.post();
-     }
-      
-  
-  }
-
-
-  redirectToDelete(id: number){
-    this.commentResquestMethods.delete(id);
-  }
-  
-
-  prepareToUpdate(comment:Comment){ 
-    this.commentToSend.id = comment.id;
-    this.commentToSend.author = comment.author;
-    this.commentToSend.content = comment.content;
-    this.methodRequest = "put"
+    
   }
 
 
   prepareToCreate() {
-    this.commentToSend = { author:"",
+   
+    this.commentToSend = { userId:0,
     content:"",
     postId:0};
     this.methodRequest = "post"
@@ -134,3 +110,4 @@ export class PostComponent implements OnInit{
 
 
 }
+

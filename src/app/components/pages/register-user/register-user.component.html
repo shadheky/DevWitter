@@ -1,0 +1,94 @@
+<div id="min-heigth" *ngIf="isNotLoged(); else loginAlert">
+  <div class="form-container">
+    <div class="form-wrapper">
+      <h1>Cadastro de Usuário</h1>
+      <form
+        action=""
+        class="col-12"
+        [formGroup]="userFormGroup"
+        #formDir="ngForm"
+        (ngSubmit)="createUser()"
+      >
+        <div class="mb-2">
+          <input
+            type="text"
+            name="userName"
+            autocomplete="off"
+            placeholder="Nome de usuário"
+            [(ngModel)]="userToPersit.username"
+            formControlName="username"
+          />
+          <div
+            class="validation-error"
+            *ngIf="username!.invalid && formDir.submitted"
+          >
+            <p class="error-p" *ngIf="username!.errors?.['required']">
+              Digite o nome de usuário
+            </p>
+            <p class="error-p" *ngIf="username!.errors?.['maxlength']">
+              username ultrapassa o limite de carateres
+            </p>
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <input
+            type="password"
+            name="senha"
+            autocomplete="off"
+            placeholder="Senha"
+            class="password"
+            [(ngModel)]="userToPersit.password"
+            formControlName="password"
+          />
+          <div
+            class="validation-error"
+            *ngIf="password!.invalid && formDir.submitted"
+          >
+            <p class="error-p" *ngIf="password!.errors?.['required']">
+              Digite a senha Senha
+            </p>
+            <p class="error-p" *ngIf="password!.errors?.['maxlength']">
+              Senha ultrapassa o limite de carateres
+            </p>
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <input
+            type="password"
+            name="senha"
+            autocomplete="off"
+            placeholder="Confirme a senha"
+            class="password"
+            [(ngModel)]="confirmPasswordValue"
+            formControlName="confirmPassword"
+          />
+          <div
+            class="validation-error"
+            *ngIf="confirmPassword!.invalid && formDir.submitted"
+          >
+            <p class="error-p" *ngIf="confirmPassword!.errors?.['required']">
+              Digite a senha Senha
+            </p>
+            <p class="error-p" *ngIf="confirmPassword!.errors?.['maxlength']">
+              Senha ultrapassa o limite de carateres
+            </p>
+          </div>
+        </div>
+
+        <button class="btn btn-primary">Cadastrar</button>
+      </form>
+      <p>Já tem login? <a>Logar</a></p>
+    </div>
+  </div>
+</div>
+
+<ng-template #loginAlert>
+    <div class="container" id="min-heigth">
+        <mat-card>
+            <mat-card-content style="display: flex; justify-content: space-between;">Você está logado <a routerLink="/">Voltar</a></mat-card-content>
+        </mat-card>
+    </div>
+      
+</ng-template>

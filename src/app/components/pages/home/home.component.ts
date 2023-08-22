@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Post } from 'src/Models/Post';
 import { PostService } from 'src/app/services/post.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -13,17 +14,18 @@ export class HomeComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.loadPosts()
   
+    this.loadPosts()
+    
     
   }
 
-  constructor(private postService:PostService){}
+  constructor(private postService:PostService, private userService:UserService ){}
 
   loadPosts():void {
 
     this.postService.findAll().subscribe( response => {
-      this.posts = response;
+      this.posts = response 
     });
 
   }

@@ -1,3 +1,9 @@
+
+
+* {
+    font-family: "Montserrat", sans-serif;
+}
+
 .primary-bg-color {
     background-color: #202124;
 }
@@ -24,3 +30,5 @@ a {
 .validation-error {
     color: tomato;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

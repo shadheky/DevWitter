@@ -1,3 +1,3 @@
 export const environment = {
-    baseUrl:"http://localhost:5025"
+    baseUrl:"https://api-devwitter.onrender.com/api"
 };
