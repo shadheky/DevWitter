@@ -19,6 +19,7 @@ export class LoginScrenComponent {
       username:"",
       password:""
   }
+  clicked:boolean = false
 
   loginFormGroup:FormGroup = new FormGroup({
     username: new FormControl("", [Validators.required]),
@@ -38,6 +39,8 @@ export class LoginScrenComponent {
       return;
     }
     
+    this.clicked = true;
+
     this.userToAutorize.password = this.userToAutorize.password.trim();
     this.userToAutorize.username = this.userToAutorize.username.trim();
 
@@ -53,12 +56,14 @@ export class LoginScrenComponent {
     
         this.loginFormService.hideLoginScreenAndBackToHome();
         this.messageService.add('Logado com sucesso')
+        this.clicked = false;
       },
       err => {
         this.messageService.add(err.error.Error);
+        this.clicked = false;
       }
     )
-    
+   
   }
 
 

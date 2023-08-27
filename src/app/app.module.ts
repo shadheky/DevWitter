@@ -16,6 +16,7 @@ import { RegisterUserComponent } from './components/pages/register-user/register
 import {MatDialogModule} from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {MatCardModule} from '@angular/material/card';
     ReactiveFormsModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

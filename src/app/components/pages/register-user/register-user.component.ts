@@ -19,6 +19,7 @@ export class RegisterUserComponent {
   }
   confirmPasswordValue:string = "";
 
+  clicked:boolean = false
   formIsSubmitted:boolean = false;
 
   userFormGroup:FormGroup = new FormGroup({
@@ -58,7 +59,7 @@ export class RegisterUserComponent {
     }
 
     this.disableButton();
-    
+    this.clicked = true
     this.userToPersit.username = this.userToPersit.username.trim();
     this.userService.createUser(this.userToPersit).subscribe(
       response => { 
@@ -69,10 +70,12 @@ export class RegisterUserComponent {
           username:"",
           password:""
         }
+        this.clicked = false
       },
       err => {
         this.messageService.add(err.error.Message);
         this.enableButton();
+        this.clicked = false
       }
     );
 

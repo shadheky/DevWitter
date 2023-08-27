@@ -25,6 +25,7 @@ export class PostFromComponent implements OnInit{
 
   loginFormIsShowed:boolean = false;
 
+  clicked:boolean = false;
 
   ngOnInit(): void {
     
@@ -64,10 +65,13 @@ export class PostFromComponent implements OnInit{
     }
 
     this.formIsSubmitted = true;
+    
+   this.clicked = true;
 
     this.postService.createPost(this.postToPersit).subscribe( response => {
       this.router.navigate(['/']);
       this.messageService.add("Post Publicado");
+      this.clicked = false;
     } );
   }
 
