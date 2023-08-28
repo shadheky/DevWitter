@@ -10,7 +10,9 @@
 }
 
 
-
+.fixed {
+    position: fixed;
+}
 
 @media (min-width:768px){
     .container {
