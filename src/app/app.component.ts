@@ -26,6 +26,11 @@ export class AppComponent implements OnInit{
 
   }
 
+  searchPost(query:string){
+    
+    
+  }
+
   constructor(private loginService:LoginService, private loginFormService:LoginFormService){}
 
 

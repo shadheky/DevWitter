@@ -8,3 +8,21 @@ h1{
 p.data-post {
     text-align: right;
 }
+
+#search {
+    margin-bottom: 30px;
+    color: black;
+    position: relative;
+}
+
+#search input {
+    height: 50px;
+    
+}
+
+.bi-search {
+    position: absolute;
+    right: 30px;
+    top: 24%;
+    cursor: pointer;
+}

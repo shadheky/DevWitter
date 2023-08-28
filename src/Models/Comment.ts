@@ -6,5 +6,6 @@ export interface Comment {
     postId:number,
     content:string,
     username?:string,
-    user?:string
+    user?:string,
+    commentDate?:string
 }

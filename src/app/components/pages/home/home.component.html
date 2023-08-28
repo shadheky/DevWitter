@@ -1,10 +1,15 @@
 <div  id="min-heigth">
 
     <h1>Posts para você</h1>
+  
     <div class="container col-lg-8 col-xl-6">
+        <form  id="search" class="d-flex" role="search">
+            <input class="form-control me-2"  placeholder="Proucure o post"  name="search" [(ngModel)]="postQuery" (keyup)="searchPost()">
+            <i class="bi bi-search" (click)="searchPost()"></i>
+        </form>
         <div class="row">
             <div class="col-12 ">
-                <a class="card mb-5" *ngFor="let post of posts" style="width: 100%;" routerLink="/post/{{post.id}}">
+                <a class="card mb-5" *ngFor="let post of postsFiltered" style="width: 100%;" routerLink="/post/{{post.id}}">
                     <div class="card-body">
                       <h5 class="card-title">{{ post.title }}</h5>
                       <h6 class="card-subtitle mb-2 text-body-secondary">Post by {{ post.username }}</h6>
