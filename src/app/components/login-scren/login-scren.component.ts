@@ -19,7 +19,10 @@ export class LoginScrenComponent {
       username:"",
       password:""
   }
-  clicked:boolean = false
+  isSend:boolean = false;
+  passwordIsShowed:boolean = false;
+  passwordInputType:string = 'password'
+  passwordEyeIcon:string = 'bi-eye-fill';
 
   loginFormGroup:FormGroup = new FormGroup({
     username: new FormControl("", [Validators.required]),
@@ -39,7 +42,7 @@ export class LoginScrenComponent {
       return;
     }
     
-    this.clicked = true;
+    this.isSend = true;
 
     this.userToAutorize.password = this.userToAutorize.password.trim();
     this.userToAutorize.username = this.userToAutorize.username.trim();
@@ -56,15 +59,33 @@ export class LoginScrenComponent {
     
         this.loginFormService.hideLoginScreenAndBackToHome();
         this.messageService.add('Logado com sucesso')
-        this.clicked = false;
+        this.isSend = false;
       },
       err => {
         this.messageService.add(err.error.Error);
-        this.clicked = false;
+        this.isSend = false;
       }
     )
    
   }
 
+  changeCurrentPasswordInput():void {
+    if(this.passwordIsShowed) {
+      this.passwordInputType = 'text';
+      return
+    }
+    this.passwordInputType = 'password'
+    
+  }
 
+  changeCurrentEyePasswordIcon():void {
+    this.passwordEyeIcon = (this.passwordEyeIcon === "bi-eye-fill") ? "bi-eye-slash-fill" : "bi-eye-fill"  
+  }
+
+  showPassword() {
+    this.passwordIsShowed = !this.passwordIsShowed
+    this.changeCurrentEyePasswordIcon();
+    this.changeCurrentPasswordInput();
+ 
+  }
 }

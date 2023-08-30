@@ -38,6 +38,7 @@ form {
   align-items: center;
   width: 100%;
   margin-top: 10%;
+
 }
 
 
@@ -78,6 +79,20 @@ input {
   border-radius: 0;
   transition: 0.5s;
 }
+
+.mb-3 {
+  position:relative;
+}
+
+.bi {
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+
 
 input:focus,
 select:focus {

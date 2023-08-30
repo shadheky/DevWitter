@@ -17,10 +17,10 @@
       </div>
       </div>
 
-      <div class="mb-3">
+      <div class="mb-3 password-group">
         
       <input
-      type="password"
+      type="{{passwordInputType}}"
       name="senha"
       autocomplete="off"
       placeholder="Senha"
@@ -28,6 +28,7 @@
       formControlName="password"
       [(ngModel)]="userToAutorize.password"
     />
+    <i class="bi {{passwordEyeIcon}}" (click)="showPassword()"></i>
         <div class="validation-error" *ngIf="password!.invalid && formDir.submitted">
           <p class="error-p">Insira a senha</p>
         </div>
@@ -35,7 +36,7 @@
       </div>
 
       <button class="btn btn-primary" type="submit" >
-        <p class="p-logar" *ngIf="!clicked; else spin">Logar</p>
+        <p class="p-logar" *ngIf="!isSend; else spin">Logar</p>
         
         <ng-template #spin>
           <div class="spinner-border" role="status">
