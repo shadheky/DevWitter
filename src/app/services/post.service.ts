@@ -37,6 +37,6 @@ private baseUrl = environment.baseUrl + "/post";
     const time = timeStamp.split('T')[1]
     const timeOnlyWithoutSeconds = `${time.split(':')[0]}:${time.split(':')[1]}`
 
-    return  dateFormated + " as " + timeOnlyWithoutSeconds;
+    return  dateFormated + " às " + timeOnlyWithoutSeconds;
   }
 }
