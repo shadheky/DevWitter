@@ -32,10 +32,11 @@ private baseUrl = environment.baseUrl + "/post";
 
   generateTimestampToFrendlyFormat(timeStamp:string){
     const dateOnlyIn8601Format = timeStamp.split('T')[0];
+    const dateFormated = `${dateOnlyIn8601Format.split("-")[2]}/${dateOnlyIn8601Format.split("-")[1]}/${dateOnlyIn8601Format.split("-")[0]}`
+    
     const time = timeStamp.split('T')[1]
     const timeOnlyWithoutSeconds = `${time.split(':')[0]}:${time.split(':')[1]}`
 
-
-    return  dateOnlyIn8601Format + " as " + timeOnlyWithoutSeconds;
+    return  dateFormated + " as " + timeOnlyWithoutSeconds;
   }
 }
