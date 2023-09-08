@@ -5,3 +5,7 @@ nav {
 button {
     border: 0 none;
 }
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
